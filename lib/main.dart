@@ -35,17 +35,6 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   List<dynamic> courses = [];
 
-  String getRandomImage() {
-    final random = Random();
-    return backgroundImages[random.nextInt(backgroundImages.length)];
-  }
-
-  List<String> backgroundImages = [
-    'assets/image1.jpg',
-    'assets/image2.jpg',
-    // Add more image paths as needed
-  ];
-
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -65,39 +54,30 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            ...courses
-                .map(
-                  (course) => Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-                    height: MediaQuery.of(context).size.height * 0.3,
+            ...courses.map((course) => Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 1.0),
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  child: Card(
                     child: Stack(
                       children: [
-                        Image.asset(
-                          getRandomImage(), // Randomly select an image
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          height: double.infinity,
-                        ),
-                        Card(    
-                          child: ListTile(
-                            title: Text(
-                              '${course[0].toString()} ${course[1].toString()}',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 18),
-                            ),
-                            subtitle: Text(
-                              '${course[2].toString()}',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 12),
-                            ),
+                        Image.network('${course[3]}',
+                        fit: BoxFit.fill,
+                        ),                   
+                        ListTile(
+                          title: Text(
+                            '${course[0].toString()} ${course[1].toString()}',
+                            style: TextStyle(color: Colors.black, fontSize: 18),
+                          ),
+                          subtitle: Text(
+                            '${course[2].toString()}',
+                            style: TextStyle(color: Colors.black, fontSize: 12, height: 25),
                           ),
                         ),
                       ],
                     ),
                   ),
-                )
-                .toList()
+                ))
           ],
         ),
       ),
